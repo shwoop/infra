@@ -21,3 +21,11 @@ variable "dns_records" {
   }))
   default = {}
 }
+
+variable "email_routes" {
+  description = "Map of emails to reroute"
+  type = map(object({
+    to = string
+    target = string 
+  }))
+}
