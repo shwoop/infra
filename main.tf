@@ -6,14 +6,33 @@ data "cloudflare_zone" "this" {
   name = var.domain
 }
 
-resource "cloudflare_record" "this" {
-  for_each = var.dns_records
+module "dns" {
+  source = "./modules/dns"
 
-  zone_id = data.cloudflare_zone.this.id
-  type    = each.value.type
-  name    = each.value.name
-  content = each.value.content
-  ttl      = each.value.ttl
-  proxied  = each.value.proxied
-  priority = each.value.priority
+  zone_id     = data.cloudflare_zone.this.id
+  dns_records = var.dns_records
+}
+
+module "email" {
+  source = "./modules/email"
+
+  zone_id      = data.cloudflare_zone.this.id
+  account_id   = data.cloudflare_zone.this.account_id
+  domain       = var.domain
+  email_routes = var.email_routes
+}
+
+moved {
+  from = cloudflare_record.this
+  to   = module.dns.cloudflare_record.this
+}
+
+moved {
+  from = cloudflare_email_routing_rule.alistair
+  to   = module.email.cloudflare_email_routing_rule.this
+}
+
+moved {
+  from = cloudflare_email_routing_catch_all.this
+  to   = module.email.cloudflare_email_routing_catch_all.this
 }
