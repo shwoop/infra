@@ -1,0 +1,26 @@
+cloudflare_api_token = "your-api-token-here"
+domain               = "example.com"
+
+dns_records = {
+  apex_a = {
+    type    = "A"
+    name    = "@"
+    content = "192.0.2.1"
+    proxied = true
+  }
+
+  www_cname = {
+    type    = "CNAME"
+    name    = "www"
+    content = "example.com"
+    proxied = true
+  }
+
+  mx = {
+    type    = "MX"
+    name    = "@"
+    content = "mail.example.com"
+    ttl     = 3600
+    proxied = false
+  }
+}
