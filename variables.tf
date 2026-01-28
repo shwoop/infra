@@ -22,6 +22,23 @@ variable "dns_records" {
   default = {}
 }
 
+variable "scaleway_access_key" {
+  description = "Scaleway access key"
+  type        = string
+  sensitive   = true
+}
+
+variable "scaleway_secret_key" {
+  description = "Scaleway secret key"
+  type        = string
+  sensitive   = true
+}
+
+variable "scaleway_project_id" {
+  description = "Scaleway project ID"
+  type        = string
+}
+
 variable "email_routes" {
   description = "Map of emails to reroute"
   type = map(object({
