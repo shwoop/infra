@@ -3,9 +3,10 @@ provider "cloudflare" {
 }
 
 provider "scaleway" {
-  access_key = var.scaleway_access_key
-  secret_key = var.scaleway_secret_key
-  project_id = var.scaleway_project_id
+  access_key      = var.scaleway_access_key
+  secret_key      = var.scaleway_secret_key
+  project_id      = var.scaleway_project_id
+  organization_id = var.scaleway_organization_id
 }
 
 data "cloudflare_zone" "this" {
@@ -26,6 +27,14 @@ module "email" {
   account_id   = data.cloudflare_zone.this.account_id
   domain       = var.domain
   email_routes = var.email_routes
+}
+
+module "storage" {
+  source = "./modules/storage"
+
+  bucket_name      = var.bucket_name
+  project_id       = var.scaleway_project_id
+  scaleway_user_id = var.scaleway_user_id
 }
 
 moved {

@@ -27,3 +27,19 @@ output "tem_domain_status" {
   description = "Status of the TEM domain verification"
   value       = module.email.tem_domain_status
 }
+
+output "backup_bucket_endpoint" {
+  description = "S3 endpoint for the backup bucket"
+  value       = module.storage.bucket_endpoint
+}
+
+output "backup_access_key" {
+  description = "Access key for backup bucket"
+  value       = module.storage.access_key
+}
+
+output "backup_secret_key" {
+  description = "Secret key for backup bucket"
+  value       = module.storage.secret_key
+  sensitive   = true
+}

@@ -39,6 +39,21 @@ variable "scaleway_project_id" {
   type        = string
 }
 
+variable "scaleway_organization_id" {
+  description = "Scaleway organization ID"
+  type        = string
+}
+
+variable "scaleway_user_id" {
+  description = "Scaleway user ID for bucket policy"
+  type        = string
+}
+
+variable "bucket_name" {
+  description = "Name of the S3-compatible backup bucket"
+  type        = string
+}
+
 variable "email_routes" {
   description = "Map of emails to reroute"
   type = map(object({
