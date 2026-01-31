@@ -46,7 +46,7 @@ module "r2_storage" {
 
 moved {
   from = module.storage
-  to = module.scaleway_storage
+  to   = module.scaleway_storage
 }
 
 moved {
