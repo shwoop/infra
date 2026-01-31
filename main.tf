@@ -37,6 +37,13 @@ module "scaleway_storage" {
   scaleway_user_id = var.scaleway_user_id
 }
 
+module "r2_storage" {
+  source = "./modules/r2_storage"
+
+  bucket_name = var.bucket_name
+  account_id  = data.cloudflare_zone.this.account_id
+}
+
 moved {
   from = module.storage
   to = module.scaleway_storage
