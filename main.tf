@@ -29,12 +29,17 @@ module "email" {
   email_routes = var.email_routes
 }
 
-module "storage" {
-  source = "./modules/storage"
+module "scaleway_storage" {
+  source = "./modules/scaleway_storage"
 
   bucket_name      = var.bucket_name
   project_id       = var.scaleway_project_id
   scaleway_user_id = var.scaleway_user_id
+}
+
+moved {
+  from = module.storage
+  to = module.scaleway_storage
 }
 
 moved {
